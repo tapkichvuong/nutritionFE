@@ -1,16 +1,30 @@
-import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Register from './components/Registers';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { publicRoutes } from './routes';
+import { DefaultLayout } from './components/Layout';
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Register/>}/>
-      </Routes>
-    </BrowserRouter>
-
-  );
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Routes>
+                    {publicRoutes.map((route, index) => {
+                        const Layout = route.layout || DefaultLayout;
+                        const Page = route.component;
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

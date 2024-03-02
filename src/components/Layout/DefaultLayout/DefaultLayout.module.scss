@@ -1,0 +1,24 @@
+.content {
+    position: relative;
+    margin: 0px auto;
+    width: 100%;
+    min-width: 420px;
+    flex-shrink: 1;
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.container {
+    margin-top: 60px;
+    display: flex;
+    width: 100vw;
+    max-width: 100%;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-self: center;
+    flex: 1 1 auto;
+}
