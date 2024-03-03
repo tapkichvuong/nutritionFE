@@ -1,9 +1,9 @@
-import Home from '~/components/views/Home';
-import Following from '~/components/views/Following';
-import Profile from '~/components/views/Profile';
-import Upload from '~/components/views/Upload';
-import Search from '~/components/views/Search';
-import { HeaderOnly } from '~/components/Layout';
+import Home from '~/views/Home';
+import Following from '~/views/Following';
+import Profile from '~/views/Profile';
+import Upload from '~/views/Upload';
+import Search from '~/views/Search';
+import { HeaderOnly } from '~/Layout';
 const publicRoutes = [
     {
         path: '/',
