@@ -1,0 +1,70 @@
+.notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: 610px;
+    width: 100%;
+    text-align: center;
+}
+
+.notfound-404 {
+    position: relative;
+    height: 231px;
+    z-index: -1;
+}
+
+.notfound-404 h1 {
+    font-family: montserrat, sans-serif;
+    font-size: 230px;
+    margin: 0;
+    font-weight: 900;
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background: url(../../assets/images/notfound.jpg) no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: cover;
+    background-position: center;
+}
+
+.notfound h2 {
+    font-family: montserrat, sans-serif;
+    color: #ced1b4;
+    text-shadow: 2px 0 #710be6, -2px 0 #710be6, 0 2px #710be6, 0 -2px #710be6, 1px 1px #710be6, -1px -1px #710be6,
+        1px -1px #710be6, -1px 1px #710be6;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.notfound p {
+    font-family: montserrat, sans-serif;
+    color: #ebdcd9;
+    text-shadow: 2px 0 #710be6, -2px 0 #710be6, 0 2px #710be6, 0 -2px #710be6, 1px 1px #710be6, -1px -1px #710be6,
+        1px -1px #710be6, -1px 1px #710be6;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.link-home {
+    font-family: montserrat, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #0046d5;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 40px;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 4px 15px -5px #0046d5;
+}

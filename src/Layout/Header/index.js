@@ -18,6 +18,7 @@ import Menu from '~/components/Menu';
 import Image from '~/components/Image';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Tippy from '@tippyjs/react';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -92,7 +93,9 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <img src={logo} alt="Logo" height={42}></img>
+                    <Link to={'/'}>
+                        <img src={logo} alt="Logo" height={42}></img>
+                    </Link>
                 </div>
                 <Search />
                 <div className={cx('actions')}>

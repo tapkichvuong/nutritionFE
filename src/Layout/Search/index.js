@@ -9,6 +9,7 @@ import Wrapper from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import styles from './Search.module.scss';
+import { search } from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 function Search() {
@@ -30,9 +31,9 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            // const result = await searchServices.search(debouncedValue);
+            const result = await search(debouncedValue);
 
-            setSearchResult([1,2,3]);
+            setSearchResult(result);
             setLoading(false);
         };
 

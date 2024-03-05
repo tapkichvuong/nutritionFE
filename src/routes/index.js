@@ -4,6 +4,7 @@ import Profile from '~/views/Profile';
 import Upload from '~/views/Upload';
 import Search from '~/views/Search';
 import { HeaderOnly } from '~/Layout';
+import NotFound from '~/views/NotFound';
 const publicRoutes = [
     {
         path: '/',
@@ -14,7 +15,7 @@ const publicRoutes = [
         component: Following,
     },
     {
-        path: '/profile',
+        path: '/profile/:nickname',
         component: Profile,
     },
     {
@@ -25,6 +26,11 @@ const publicRoutes = [
     {
         path: '/search',
         component: Search,
+    },
+    {
+        path: '*',
+        component: NotFound,
+        layout: HeaderOnly
     },
 ];
 
