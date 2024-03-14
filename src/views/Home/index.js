@@ -1,5 +1,9 @@
+import Posts from "~/components/Posts";
+
 function Home() {
-    return <h2>Home Page</h2>;
+    return <div>
+        <Posts/>
+    </div>;
 }
 
 export default Home;

@@ -9,6 +9,50 @@
     width: 240px;
     background: rgb(255, 255, 255);
     position: fixed;
-    z-index: 99;
     padding-right: 8px;
+}
+
+.sidebar {
+    padding: '50px 0px 0px 370px';
+    position: fixed;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 240px;
+    background-color: #fff;
+}
+
+.sidebar-menu {
+    position: relative;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    place-content: flex-start;
+    padding: 1rem 4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #555555;
+    transition: color 0.3s ease-in-out;
+}
+
+.indicator {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    background-color: rgb(255, 59, 92);
+    z-index: -1;
+    transform: translateX(-50%);
+    transition: 0.3s ease-in-out;
+}
+
+.item-icon {
+    margin-right: 1rem;
+}
+
+.active {
+    color: #fff;
 }

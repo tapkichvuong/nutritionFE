@@ -1,4 +1,7 @@
 import Home from '~/views/Home';
+import Login from '~/views/Login';
+import Register from '~/views/Register';
+import PostDetail from '~/views/PostDetail';
 import Following from '~/views/Following';
 import Profile from '~/views/Profile';
 import Upload from '~/views/Upload';
@@ -11,12 +14,26 @@ const publicRoutes = [
         component: Home,
     },
     {
+        path: '/login',
+        component: Login,
+        layout: HeaderOnly,
+    },
+    {
+        path: '/register',
+        component: Register,
+        layout: HeaderOnly,
+    },
+    {
         path: '/following',
         component: Following,
     },
     {
         path: '/profile/:nickname',
         component: Profile,
+    },
+    {
+        path: '/post/:id',
+        component: PostDetail,
     },
     {
         path: '/upload',
@@ -26,11 +43,12 @@ const publicRoutes = [
     {
         path: '/search',
         component: Search,
+        layout: HeaderOnly,
     },
     {
         path: '*',
         component: NotFound,
-        layout: HeaderOnly
+        layout: HeaderOnly,
     },
 ];
 
