@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { publicRoutes } from './routes';
+import { publicRoutes, privateRoutes } from './routes';
 import { DefaultLayout } from './Layout';
+
 function App() {
     return (
         <BrowserRouter>
@@ -19,6 +20,23 @@ function App() {
                                     </Layout>
                                 }
                             />
+                        );
+                    })}
+                    {privateRoutes.map((route, index) => {
+                        const Layout = route.layout || DefaultLayout;
+                        const Page = route.component;
+                        const auth = route.auth;
+                        return (
+                            <Route key={index} element={auth}>
+                                <Route
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            </Route>
                         );
                     })}
                 </Routes>

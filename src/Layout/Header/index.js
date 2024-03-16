@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import logo from '~/assets/images/logo.jpeg';
@@ -18,7 +19,10 @@ import Menu from '~/components/Menu';
 import Image from '~/components/Image';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Tippy from '@tippyjs/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import useAuth from '~/hooks/useAuth';
+import AuthContext from '~/context/AuthProvider';
 
 const cx = classNames.bind(styles);
 
@@ -54,18 +58,40 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-    const currentUser = false;
+    const { setAuth } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { auth } = useAuth();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    useEffect(() => {
+        setIsLoggedIn(Object.keys(auth).length !== 0);
+    }, [auth]);
+
+    const logout = async () => {
+        // if used in more components, this should be in context
+        // axios to /logout endpoint
+        // try {
+        //     const response = await logout(auth?.access_token);
+        // } catch (err) {
+        //     console.log(err);
+        // }
+        setAuth({});
+        navigate('/');
+    };
     // Handle logic
     const handleMenuChange = (menuItem) => {
-        switch (menuItem.type) {
+        switch (menuItem.title) {
             case 'language':
                 // Handle change language
+                break;
+            case 'Log out':
+                console.log('work');
+                logout();
                 break;
             default:
         }
     };
-    const userMenu = [
+    const USER_MENU = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
@@ -85,7 +111,6 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log out',
-            to: '/logout',
             separate: true,
         },
     ];
@@ -99,7 +124,7 @@ function Header() {
                 </div>
                 <Search />
                 <div className={cx('actions')}>
-                    {currentUser ? (
+                    {isLoggedIn ? (
                         <>
                             <Tippy arrow={true} content="Upload video" placement="bottom" duration={0}>
                                 <button className={cx('action-btn')}>
@@ -120,12 +145,16 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button to={`/login`} text>Upload</Button>
-                            <Button to={`/login`} primary>Log in</Button>
+                            <Button to={`/login`} text>
+                                Upload
+                            </Button>
+                            <Button to={`/login`} primary>
+                                Log in
+                            </Button>
                         </>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
-                        {currentUser ? (
+                    <Menu items={isLoggedIn ? USER_MENU : MENU_ITEMS} onChange={handleMenuChange}>
+                        {isLoggedIn ? (
                             <Image
                                 className={cx('user-avatar')}
                                 src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"

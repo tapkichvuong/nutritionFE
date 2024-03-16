@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
@@ -15,7 +15,12 @@ const defaultFn = () => {};
 function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
-
+    useEffect(() => {
+        if (history.data !== items) {
+            // Items have changed, trigger re-render
+            setHistory([{ data: items }]);
+        }
+    }, [items]);
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.children;

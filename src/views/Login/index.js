@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,12 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '~/hooks/useAuth';
+import { login } from '~/services/authServices';
 
 function Copyright(props) {
     return (
@@ -31,17 +38,90 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
-    const handleSubmit = (event) => {
+    const { setAuth } = useAuth();
+
+    const userRef = useRef();
+
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, []);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        try {
+            const response = await login(user, pwd);
+            console.log(response)
+            if (!!response?.access_token) {
+                const accessToken = response?.access_token;
+                const roles = response?.role;
+                setAuth({ user, pwd, accessToken, roles });
+                setUser('');
+                setPwd('');
+                toast.success('Login successfully', {
+                    position: 'top-center',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                    onClose: () => {
+                        navigate(from, { replace: true });
+                    },
+                });
+            } else {
+                toast.success(response?.message, {
+                    position: 'top-center',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
+            }
+        } catch (err) {
+            console.log(err)
+            if (!err?.response) {
+                toast.error('No Server Response', {
+                    // ... toast options
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
+            } else {
+                toast.error('Login Failed (Server Error)', {
+                    // ... toast option
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
+            }
+        }
     };
 
     return (
         <ThemeProvider theme={defaultTheme}>
+            <ToastContainer/>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
                 <Grid
@@ -78,11 +158,14 @@ export default function Login() {
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
+                                id="user"
+                                label="User Name"
+                                name="user"
+                                autoComplete="user"
                                 autoFocus
+                                onChange={(e) => setUser(e.target.value)}
+                                value={user}
+                                ref={userRef}
                             />
                             <TextField
                                 margin="normal"
@@ -93,6 +176,8 @@ export default function Login() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                onChange={(e) => setPwd(e.target.value)}
+                                value={pwd}
                             />
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}

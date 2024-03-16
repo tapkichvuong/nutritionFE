@@ -6,8 +6,17 @@ import Following from '~/views/Following';
 import Profile from '~/views/Profile';
 import Upload from '~/views/Upload';
 import Search from '~/views/Search';
+import Unauthorized from '~/views/Unauthorized';
 import { HeaderOnly } from '~/Layout';
 import NotFound from '~/views/NotFound';
+import RequireAuth from '~/components/RequireAuth';
+
+const ROLES = {
+    client: 'CLIENT',
+    doctor: 'DOCTOR',
+    seller: 'SELLER',
+};
+
 const publicRoutes = [
     {
         path: '/',
@@ -24,10 +33,6 @@ const publicRoutes = [
         layout: HeaderOnly,
     },
     {
-        path: '/following',
-        component: Following,
-    },
-    {
         path: '/profile/:nickname',
         component: Profile,
     },
@@ -35,14 +40,16 @@ const publicRoutes = [
         path: '/post/:id',
         component: PostDetail,
     },
-    {
-        path: '/upload',
-        component: Upload,
-        layout: HeaderOnly,
-    },
+
     {
         path: '/search',
         component: Search,
+        layout: HeaderOnly,
+    },
+
+    {
+        path: '/unauthorized',
+        component: Unauthorized,
         layout: HeaderOnly,
     },
     {
@@ -52,6 +59,17 @@ const publicRoutes = [
     },
 ];
 
-const privateRoutes = [];
+const privateRoutes = [
+    {
+        path: '/upload',
+        component: Upload,
+        auth: RequireAuth,
+        layout: HeaderOnly,
+    },
+    {
+        path: '/following',
+        component: Following,
+    },
+];
 
 export { publicRoutes, privateRoutes };

@@ -1,0 +1,20 @@
+.instructions {
+    display: flex;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(0, 0, 0, 0.1);
+    color: var(--primary);
+    padding: 0.25rem;
+    margin-bottom: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.icon{
+    margin-right: 0.5rem;
+}
