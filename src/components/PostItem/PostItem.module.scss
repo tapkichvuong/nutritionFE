@@ -1,15 +1,15 @@
 .post {
     margin: 1rem;
     background: var(--white);
-    padding: 1rem;
-    border-radius: 2rem;
+    padding: 2rem;
+    border-radius: calc(16px + 2rem);;
     padding-bottom: 2rem;
     width: 600px;
     cursor: default;
 }
 
 .post-thumbnail {
-    border-radius: 1rem;
+    border-radius: 16px;
     overflow: hidden;
     height: 30rem;
 }

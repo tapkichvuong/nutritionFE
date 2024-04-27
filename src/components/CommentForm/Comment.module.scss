@@ -1,0 +1,48 @@
+.error-msg {
+    color: hsl(0, 100%, 67%);
+  }
+  .message-input {
+    flex-grow: 1;
+    resize: none;
+    height: 70px;
+    border-radius: .5em;
+    padding: .5em;
+    font-size: inherit;
+    font-family: inherit;
+    border: 2px solid hsl(235, 50%, 74%);
+    line-height: 1.4;
+  }
+  
+  .message-input:focus {
+    border-color: hsl(235, 100%, 67%);
+    outline: none;
+  }
+  .btn {
+    --hue: 235;
+    --color: hsl(var(--hue), 100%, 67%);
+    padding: .5em 1em;
+    background: var(--color);
+    border: none;
+    color: white;
+    border-radius: .5em;
+    font-size: .75em;
+    cursor: pointer;
+  }
+  
+  .btn:hover,
+  .btn:focus-visible {
+    --color: hsl(var(--hue), 100%, 74%);
+  }
+  
+  .btn.icon-btn {
+    background: none;
+    color: var(--color);
+    padding: .25em;
+    display: flex;
+    align-items: center;
+  }
+  .comment-form-row {
+    display: flex;
+    gap: .5rem;
+    margin: 2rem;
+  }

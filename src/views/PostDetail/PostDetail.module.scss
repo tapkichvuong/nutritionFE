@@ -1,0 +1,51 @@
+.post-detail {
+    margin-top: 70px;
+    width: 50%;
+    background: #fff;
+    margin-inline: auto;
+    padding: 2rem 1rem;
+}
+
+.container {
+    width: 84%;
+    margin-inline: auto;
+}
+.post-detail__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.post-detail__buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.category {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: hwb(240 95% 0%);
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+.post-post-detail__thumbnail {
+    margin: 1rem 0;
+    width: auto;
+    max-height: 30rem;
+}
+
+.post-detail p {
+    margin-bottom: 1rem;
+}
+.comments-title {
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+.mt-4 {
+    margin-top: 1rem;
+}

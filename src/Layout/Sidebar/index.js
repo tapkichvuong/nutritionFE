@@ -2,35 +2,23 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faBook } from '@fortawesome/free-solid-svg-icons';
 import styles from './Sidebar.module.scss';
 
 const cx = classNames.bind(styles);
 const sidebarNavItems = [
     {
-        display: 'Dashboard',
+        display: 'Home',
         icon: <FontAwesomeIcon icon={faHouse} />,
         to: '/',
         section: '',
     },
     {
-        display: 'Getting Started',
-        icon: <FontAwesomeIcon icon={faHouse} />,
-        to: '/following',
-        section: 'following',
+        display: 'My Post',
+        icon: <FontAwesomeIcon icon={faBook} />,
+        to: '/post',
+        section: 'mypost',
     },
-    {
-        display: 'Calendar',
-        icon: <FontAwesomeIcon icon={faHouse} />,
-        to: '/upload',
-        section: 'upload',
-    },
-    {
-        display: 'User',
-        icon: <FontAwesomeIcon icon={faHouse} />,
-        to: '/search',
-        section: 'search',
-    }
 ];
 
 const Sidebar = () => {

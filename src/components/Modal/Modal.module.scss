@@ -1,0 +1,79 @@
+/* Styles for the outermost div */
+.crop-dialog {
+    position: relative;
+    z-index: 10;
+}
+
+/* Styles for the first nested div */
+.backdrop {
+    background-color: #0b838e;
+    background-color: rgba(0, 0, 0, 0.75);
+    transition-property: all;
+    transition-duration: 0.3s; /* Adjust duration as needed */
+    transition-timing-function: ease; /* Adjust timing function as needed */
+    backdrop-filter: blur(4px);
+}
+
+/* Styles for the second nested div */
+.overlay {
+    position: fixed;
+    top: 10%;
+    right: 0;
+    bottom: 0;
+    left: 15%;
+    width: 70vw;
+    overflow-y: auto;
+}
+
+/* Styles for the third nested div */
+.dialog-content {
+    display: flex;
+    min-height: 100%;
+    justify-content: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    text-align: center;
+}
+
+/* Styles for the fourth nested div */
+.dialog-box {
+    position: relative;
+    width: 95%;
+    min-height: 80vh;
+    max-height: 80vh;
+    border-radius: 1rem;
+    background-color: #d1fcff;
+    color: #e2e8f0;
+    text-align: left;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.warrper {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Styles for the button's icon */
+.close-icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+}
+
+/* Styles for the span containing the "Close menu" text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

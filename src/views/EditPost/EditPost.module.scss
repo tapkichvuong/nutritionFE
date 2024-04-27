@@ -1,0 +1,63 @@
+h1.title {
+    position: relative;
+    padding: 0.5em;
+    margin: 0;
+    margin-bottom: 1em;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 160px;
+    text-align: center;
+    white-space: nowrap;
+    padding-bottom: 13px;
+    color: #080808;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+h1.title:before {
+    background-color: #c50000;
+    content: '';
+    display: block;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 5px;
+}
+h1.title:after {
+    background-color: #c50000;
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 0.25em;
+}
+.instructions {
+    display: flex;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(0, 0, 0, 0.1);
+    color: var(--primary);
+    padding: 0.25rem;
+    margin-bottom: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.ql-editor {
+    height: 8rem;
+    overflow: scroll;
+    background-color: aliceblue;
+}
+
+.image-preview {
+    max-height: 20vh;
+}

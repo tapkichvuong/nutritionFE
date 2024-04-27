@@ -5,11 +5,14 @@ import PostDetail from '~/views/PostDetail';
 import Following from '~/views/Following';
 import Profile from '~/views/Profile';
 import Upload from '~/views/Upload';
+import EditPost from '~/views/EditPost';
 import Search from '~/views/Search';
+import Setting from '~/views/Setting';
 import Unauthorized from '~/views/Unauthorized';
-import { HeaderOnly } from '~/Layout';
+import { DefaultLayout, HeaderOnly } from '~/Layout';
 import NotFound from '~/views/NotFound';
 import RequireAuth from '~/components/RequireAuth';
+import PostAdmin from '~/views/PostAdmin';
 
 const ROLES = {
     client: 'CLIENT',
@@ -18,10 +21,6 @@ const ROLES = {
 };
 
 const publicRoutes = [
-    {
-        path: '/',
-        component: Home,
-    },
     {
         path: '/login',
         component: Login,
@@ -36,11 +35,6 @@ const publicRoutes = [
         path: '/profile/:nickname',
         component: Profile,
     },
-    {
-        path: '/post/:id',
-        component: PostDetail,
-    },
-
     {
         path: '/search',
         component: Search,
@@ -61,9 +55,51 @@ const publicRoutes = [
 
 const privateRoutes = [
     {
-        path: '/upload',
+        path: '/',
+        component: Home,
+    },
+    {
+        title: 'post page',
+        path: '/post/:id',
+        component: PostDetail,
+        auth: <RequireAuth allowedRoles={[ROLES.client, ROLES.seller, ROLES.doctor]} />,
+    },
+    {
+        path: '/',
+        component: Home,
+    },
+    {
+        path: '/post/upload',
         component: Upload,
-        auth: RequireAuth,
+        auth: <RequireAuth allowedRoles={[ROLES.doctor]} />,
+        layout: HeaderOnly,
+    },
+    {
+        path: '/post/:id/edit',
+        component: EditPost,
+        auth: <RequireAuth allowedRoles={[ROLES.doctor]} />,
+        layout: HeaderOnly,
+    },
+    {
+        path: '/myprofile',
+        component: Profile,
+        auth: <RequireAuth allowedRoles={[ROLES.client, ROLES.seller, ROLES.doctor]} />,
+        layout: DefaultLayout,
+    },
+    {
+        path: '/settings',
+        component: Setting,
+        auth: <RequireAuth allowedRoles={[ROLES.client, ROLES.seller, ROLES.doctor]} />,
+        layout: DefaultLayout,
+    },
+    {
+        path: '/profile/:nickname',
+        component: Profile,
+    },
+    {
+        path: '/post',
+        component: PostAdmin,
+        auth: <RequireAuth allowedRoles={[ROLES.client, ROLES.seller, ROLES.doctor]} />,
         layout: HeaderOnly,
     },
     {

@@ -4,13 +4,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles';
 import { AuthProvider } from './context/AuthProvider';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <GlobalStyles>
-            <AuthProvider>
-                <App />
-            </AuthProvider>
+            <BrowserRouter>
+                <AuthProvider>
+                    <Routes>
+                        <Route path="/*" element={<App />} />
+                    </Routes>
+                </AuthProvider>
+            </BrowserRouter>
         </GlobalStyles>
     </React.StrictMode>,
 );

@@ -16,11 +16,11 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
     useEffect(() => {
-        if (history.data !== items) {
+        if (items !== history.data) {
             // Items have changed, trigger re-render
             setHistory([{ data: items }]);
         }
-    }, [items]);
+    }, [items, history.data]);
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.children;

@@ -22,7 +22,8 @@ import Tippy from '@tippyjs/react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import useAuth from '~/hooks/useAuth';
-import AuthContext from '~/context/AuthProvider';
+import useLogout from "~/hooks/useLogout";
+import { useGetProfile } from '~/services/userServices';
 
 const cx = classNames.bind(styles);
 
@@ -58,16 +59,29 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-    const { setAuth } = useContext(AuthContext);
+    const logout = useLogout();
     const navigate = useNavigate();
     const { auth } = useAuth();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    const [avatar, setAvatar] = useState('');
+    const getProfile = useGetProfile();
     useEffect(() => {
         setIsLoggedIn(Object.keys(auth).length !== 0);
+        const getAvatar = async () => {
+            try {
+                const response = await getProfile(auth?.accessToken);
+                setAvatar(response?.avatar);
+            } catch (error) {
+                console.error('Error fetching post:', error);
+                // Handle error, e.g., redirect to an error page
+            }
+        }
+        getAvatar();
     }, [auth]);
-
-    const logout = async () => {
+    const nagivateUpload = () => {
+        navigate('post/upload');
+    }
+    const signOut  = async () => {
         // if used in more components, this should be in context
         // axios to /logout endpoint
         // try {
@@ -75,7 +89,7 @@ function Header() {
         // } catch (err) {
         //     console.log(err);
         // }
-        setAuth({});
+        await logout();
         navigate('/');
     };
     // Handle logic
@@ -85,8 +99,7 @@ function Header() {
                 // Handle change language
                 break;
             case 'Log out':
-                console.log('work');
-                logout();
+                signOut();
                 break;
             default:
         }
@@ -95,12 +108,7 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: '/@hoaa',
-        },
-        {
-            icon: <FontAwesomeIcon icon={faCoins} />,
-            title: 'Get coins',
-            to: '/coin',
+            to: '/myprofile',
         },
         {
             icon: <FontAwesomeIcon icon={faGear} />,
@@ -127,7 +135,7 @@ function Header() {
                     {isLoggedIn ? (
                         <>
                             <Tippy arrow={true} content="Upload video" placement="bottom" duration={0}>
-                                <button className={cx('action-btn')}>
+                                <button className={cx('action-btn')} onClick={nagivateUpload}>
                                     <UploadIcon />
                                 </button>
                             </Tippy>
@@ -145,7 +153,7 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button to={`/login`} text>
+                            <Button to={`/upload`} text>
                                 Upload
                             </Button>
                             <Button to={`/login`} primary>
@@ -157,7 +165,7 @@ function Header() {
                         {isLoggedIn ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
+                                src={avatar}
                                 alt="Nguyen Van A"
                             />
                         ) : (

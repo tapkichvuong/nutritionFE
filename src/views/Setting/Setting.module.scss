@@ -1,0 +1,50 @@
+.avatar {
+    width: 150px; // Corresponds to w-[150px]
+    height: 150px; // Corresponds to h-[150px]
+    border-radius: 50%; // Corresponds to rounded-full
+    border-width: 2px; // Corresponds to border-2
+    border-color: #cbd5e0; // Corresponds to border-gray-400
+}
+.avatar-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.avatar-button {
+    position: absolute; // Corresponds to absolute
+    bottom: -0.75rem; // Corresponds to -bottom-3
+    left: 0; // Corresponds to left-0
+    right: 0; // Corresponds to right-0
+    margin-left: auto; // Corresponds to m-auto
+    margin-right: auto; // Corresponds to m-auto
+    width: fit-content; // Corresponds to w-fit
+    padding: 0.35rem; // Corresponds to p-[.35rem]
+    border-radius: 9999px; // Corresponds to rounded-full
+    background-color: rgb(239, 242, 252); // Corresponds to bg-gray-800
+    border: 1px solid #cbd5e0; // Corresponds to border border-gray-600
+
+    &:hover {
+        background-color: #4a5568; // Corresponds to hover:bg-gray-700
+    }
+}
+
+.instructions {
+    display: flex;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(0, 0, 0, 0.1);
+    color: var(--primary);
+    padding: 0.25rem;
+    margin-bottom: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.icon {
+    margin-right: 0.5rem;
+}

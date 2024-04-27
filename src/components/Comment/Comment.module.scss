@@ -1,0 +1,113 @@
+.error-msg {
+    color: hsl(0, 100%, 67%);
+}
+.mt-1 {
+    margin-top: 0.25rem;
+}
+.comment-stack {
+    margin: 0.5rem 0;
+}
+
+.comment-stack:last-child {
+    margin-bottom: 0;
+}
+
+.nested-comments {
+    padding-left: 0.5rem;
+    flex-grow: 1;
+}
+
+.nested-comments-stack {
+    display: flex;
+}
+.collapse-line {
+    margin: 2rem;
+    border: none;
+    background: none;
+    padding: 0;
+    width: 15px;
+    margin-top: 0.5rem;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transform: translateX(-50%);
+}
+
+.collapse-line:hover::before,
+.collapse-line:focus-visible::before {
+    background-color: hsl(235, 100%, 60%);
+}
+
+.collapse-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: hsl(235, 50%, 74%);
+    transition: background-color 100ms ease-in-out;
+}
+
+.hide {
+    display: none;
+}
+.btn {
+    --hue: 235;
+    --color: hsl(var(--hue), 100%, 67%);
+    padding: 0.5em 1em;
+    background: var(--color);
+    border: none;
+    color: white;
+    border-radius: 0.5em;
+    font-size: 0.75em;
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus-visible {
+    --color: hsl(var(--hue), 100%, 74%);
+}
+
+.btn.icon-btn {
+    background: none;
+    color: var(--color);
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+}
+
+.comment {
+    padding: 1rem;
+    border: 1px solid hsl(235, 100%, 90%);
+    border-radius: 0.5rem;
+    margin: 2rem;
+}
+.header {
+    color: hsl(235, 50%, 67%);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    font-size: 0.75em;
+}
+.name {
+    font-weight: bold;
+}
+.message {
+    white-space: pre-wrap;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.footer {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.ml-3 {
+    margin-left: 1.5rem;
+}
+
+.btn[disabled] {
+    --color: hsl(var(--hue), 20%, 74%);
+}

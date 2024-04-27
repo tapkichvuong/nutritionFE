@@ -23,8 +23,8 @@ import classNames from 'classnames/bind';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { register } from '~/services/authServices';
-import styles from './Register,module.scss';
+import { useRegister } from '~/services/authServices';
+import styles from './Register.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -33,7 +33,7 @@ function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
+            <Link color="inherit" to="/">
                 Nutrition
             </Link>{' '}
             {new Date().getFullYear()}
@@ -87,6 +87,8 @@ function Register() {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
     }, [pwd, matchPwd]);
+
+    const register = useRegister();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -245,7 +247,10 @@ function Register() {
                                     onChange={(e) => setPwd(e.target.value)}
                                     value={pwd}
                                 />
-                                <div id="pwdnote" className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}>
+                                <div
+                                    id="pwdnote"
+                                    className={!!pwd && pwdFocus && !validPwd ? cx('instructions') : cx('offscreen')}
+                                >
                                     <FontAwesomeIcon icon={faInfoCircle} className={cx('icon')} />
                                     <p>
                                         8 to 24 characters.
@@ -275,7 +280,7 @@ function Register() {
                                 />
                                 <div
                                     id="confirmnote"
-                                    className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}
+                                    className={matchFocus && !validMatch ? cx('instructions') : cx('offscreen')}
                                 >
                                     <FontAwesomeIcon icon={faInfoCircle} className={cx('icon')} />
                                     <p>Must match the first password input field.</p>

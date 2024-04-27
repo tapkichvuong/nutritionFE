@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '~/hooks/useAuth';
-import { login } from '~/services/authServices';
+import { useLogin } from '~/services/authServices';
 
 function Copyright(props) {
     return (
@@ -38,8 +38,8 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
-    const { setAuth } = useAuth();
-
+    const { setAuth, persist, setPersist } = useAuth();
+    const login = useLogin();
     const userRef = useRef();
 
     const [user, setUser] = useState('');
@@ -57,11 +57,13 @@ export default function Login() {
         event.preventDefault();
         try {
             const response = await login(user, pwd);
-            console.log(response)
+            console.log(response);
             if (!!response?.access_token) {
                 const accessToken = response?.access_token;
-                const roles = response?.role;
-                setAuth({ user, pwd, accessToken, roles });
+                const refreshToken = response?.refresh_token;
+                const role = response?.role;
+                setAuth({ user, accessToken, role });
+                if(persist){sessionStorage.setItem('refreshToken', refreshToken);}
                 setUser('');
                 setPwd('');
                 toast.success('Login successfully', {
@@ -90,7 +92,7 @@ export default function Login() {
                 });
             }
         } catch (err) {
-            console.log(err)
+            console.log(err);
             if (!err?.response) {
                 toast.error('No Server Response', {
                     // ... toast options
@@ -118,10 +120,16 @@ export default function Login() {
             }
         }
     };
+    const togglePersist = () => {
+        setPersist((prev) => !prev);
+    };
 
+    useEffect(() => {
+        localStorage.setItem('persist', persist);
+    }, [persist]);
     return (
         <ThemeProvider theme={defaultTheme}>
-            <ToastContainer/>
+            <ToastContainer />
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
                 <Grid
@@ -180,6 +188,8 @@ export default function Login() {
                                 value={pwd}
                             />
                             <FormControlLabel
+                                onChange={togglePersist}
+                                checked={persist}
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             />

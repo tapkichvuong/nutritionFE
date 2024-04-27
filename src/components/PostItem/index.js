@@ -5,12 +5,20 @@ import classNames from 'classnames/bind';
 import AccountItem from '../AccountItem';
 const cx = classNames.bind(styles);
 
-const USER = {
-    nickname: 'aba',
-    full_name: 'aaa',
-};
-function PostItem({ postID, category, title, desc, authorID, thumbnail }) {
-    const shortDesc = desc.length > 145 ? desc.substr(0, 145) + '...' : desc;
+function PostItem({ postID, category, title, desc, thumbnail, firstName, lastName, avatar }) {
+    const USER = {
+        nickname: firstName,
+        full_name: lastName,
+        avatar: avatar
+    };
+    const extractTextFromHtml = (html) => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        return Array.from(tempDiv.children)
+            .map(child => child.textContent || child.innerText || '')
+            .join(' ');
+    };
+    const shortDesc = extractTextFromHtml(desc).length > 145 ? extractTextFromHtml(desc).substr(0, 145) + '...' : extractTextFromHtml(desc);;
     const shortTitle = title.length > 30 ? title.substr(0, 145) + '...' : title;
     return (
         <article className={cx('post')}>
