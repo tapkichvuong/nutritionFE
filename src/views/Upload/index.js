@@ -149,7 +149,16 @@ function Upload() {
             }
         }
     };
-    const POST_CATEGORIES = ['Uncategorized', 'Adult', 'Children'];
+    const POST_CATEGORIES = [
+        'Uncategorized',
+        'Eat well',
+        'Nutrition basics',
+        'Vitamins and supplements',
+        'Food, beverages & meal kits',
+        'Fitness gear',
+        'Skincare',
+        'News',
+    ];
     return (
         <ThemeProvider theme={defaultTheme}>
             <ToastContainer />
@@ -168,9 +177,9 @@ function Upload() {
                         Create Post
                     </Typography>
 
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, maxWidth: '80%' }}>
                         <Grid container spacing={4}>
-                            <Grid item xs={12}>
+                            <Grid item xs={8}>
                                 <TextField
                                     required
                                     fullWidth
@@ -187,7 +196,7 @@ function Upload() {
                                     <p>Must have a title</p>
                                 </div>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={4}>
                                 <FormControl required fullWidth>
                                     <InputLabel id="Role">Category</InputLabel>
                                     <Select
@@ -205,10 +214,24 @@ function Upload() {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item>
+                            <Grid
+                                container
+                                spacing={0}
+                                direction="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{ mt: 3 }}
+                            >
                                 <Image src={thumbPath} className={cx('image-preview')} />
                             </Grid>
-                            <Grid item>
+                            <Grid
+                                container
+                                spacing={0}
+                                direction="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{ mt: 3 }}
+                            >
                                 <Button
                                     component="label"
                                     role={undefined}
@@ -228,6 +251,7 @@ function Upload() {
                             </Grid>
                             <Grid item xs={12}>
                                 <ReactQuill
+                                    theme="snow"
                                     modules={modules}
                                     formats={formats}
                                     value={description}

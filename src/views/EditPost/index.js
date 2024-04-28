@@ -184,7 +184,16 @@ function EditPost() {
             }
         }
     };
-    const POST_CATEGORIES = ['Uncategorized', 'Adult', 'Children'];
+    const POST_CATEGORIES = [
+        'Uncategorized',
+        'Eat well',
+        'Nutrition basics',
+        'Vitamins and supplements',
+        'Food, beverages & meal kits',
+        'Fitness gear',
+        'Skincare',
+        'News',
+    ];
     return isLoading ? (
         <></>
     ) : (
@@ -204,9 +213,9 @@ function EditPost() {
                     <Typography component="h1" variant="h5" className={cx('title')}>
                         Edit Post
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, maxWidth: '80%' }}>
                         <Grid container spacing={4}>
-                            <Grid item xs={12}>
+                            <Grid item xs={8}>
                                 <TextField
                                     required
                                     fullWidth
@@ -223,7 +232,7 @@ function EditPost() {
                                     <p>Must have a title</p>
                                 </div>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={4}>
                                 <FormControl required fullWidth>
                                     <InputLabel id="Role">Category</InputLabel>
                                     <Select
@@ -241,10 +250,22 @@ function EditPost() {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item>
+                            <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{ mt: 3 }}
+                            >
                                 <Image src={thumbPath} className={cx('image-preview')} />
                             </Grid>
-                            <Grid item>
+                            <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{ mt: 3 }}
+                            >
                                 <Button
                                     component="label"
                                     role={undefined}
@@ -264,6 +285,7 @@ function EditPost() {
                             </Grid>
                             <Grid item xs={12}>
                                 <ReactQuill
+                                    theme="snow"
                                     modules={modules}
                                     formats={formats}
                                     value={description}
