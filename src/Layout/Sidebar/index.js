@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faBook, faRobot } from '@fortawesome/free-solid-svg-icons';
 import styles from './Sidebar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -18,6 +18,12 @@ const sidebarNavItems = [
         icon: <FontAwesomeIcon icon={faBook} />,
         to: '/post',
         section: 'mypost',
+    },
+    {
+        display: 'Chat Bot',
+        icon: <FontAwesomeIcon icon={faRobot} />,
+        to: '/chatbot',
+        section: 'chatbot',
     },
 ];
 

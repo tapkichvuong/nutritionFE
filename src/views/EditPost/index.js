@@ -94,17 +94,7 @@ function EditPost() {
         'image',
     ];
     const modifyApi = useModify();
-
-    useEffect(() => {
-        if (!thumbnail) {
-            fetch(thumbPath)
-                .then((res) => res.blob())
-                .then((blob) => {
-                    const file = new File([blob], 'dot.png', blob);
-                    setThumbnail(file);
-                });
-        }
-    }, [thumbPath]);
+    
     useEffect(() => {
         if (thumbnail) {
             setThumbPath(URL.createObjectURL(thumbnail));
@@ -132,7 +122,6 @@ function EditPost() {
     }, [id]);
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
         event.preventDefault();
         try {
             const response = await modifyApi(id, title, category, description, thumbnail, auth?.accessToken);

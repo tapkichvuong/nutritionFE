@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import logo from '~/assets/images/logo.jpeg';
@@ -11,7 +11,6 @@ import {
     faCircleQuestion,
     faKeyboard,
     faUser,
-    faCoins,
     faGear,
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';

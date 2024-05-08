@@ -9,7 +9,7 @@ import Wrapper from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import styles from './Search.module.scss';
-import { search } from '~/services/searchServices';
+import { useSearch } from '~/services/searchServices';
 
 const cx = classNames.bind(styles);
 function Search() {
@@ -19,7 +19,7 @@ function Search() {
     const [loading, setLoading] = useState(false);
 
     const debouncedValue = useDebounce(searchValue, 500);
-
+    const search = useSearch();
     const inputRef = useRef();
 
     useEffect(() => {

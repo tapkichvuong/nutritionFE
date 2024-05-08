@@ -3,22 +3,42 @@ import styles from './Profile.module.scss';
 import Image from '~/components/Image';
 import { Link } from 'react-router-dom';
 import Posts from '~/components/Posts';
+import useAuth from '~/hooks/useAuth';
+import { useEffect, useState } from 'react';
+import { useGetProfile } from '~/services/userServices';
 const cx = classNames.bind(styles);
 
 function Profile() {
+    const { auth } = useAuth();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [profile, setProfile] = useState('');
+    const getProfile = useGetProfile();
+    useEffect(() => {
+        setIsLoggedIn(Object.keys(auth).length !== 0);
+        const getAvatar = async () => {
+            try {
+                const response = await getProfile(auth?.accessToken);
+                setProfile(response);
+            } catch (error) {
+                console.error('Error fetching post:', error);
+                // Handle error, e.g., redirect to an error page
+            }
+        }
+        getAvatar();
+    }, [auth]);
     return (
         <div className={cx('container')}>
             <section className={cx('author-bio')}>
                 <div className={cx('author-bio__title')}>
                     <Link to="/profile/aba">
                         <Image
-                            src="https://secure.gravatar.com/avatar/079be27600be4444562a48cc77b84d5f?s=300&d=mm&r=g"
+                            src={profile?.avatar}
                             className={cx('author-avatar')}
                         />
                     </Link>
 
                     <Link to="/profile/aba">
-                        <h4>ABC</h4>
+                        <h4>{profile?.firstName + profile?.lastName}</h4>
                     </Link>
                 </div>
                 <div>

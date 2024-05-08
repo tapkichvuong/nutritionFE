@@ -38,8 +38,8 @@ function PostDetail() {
                     setCategory(response.category);
                     setDescription(response.body);
                     setThumbnail(response.thumbnail);
-                    USER.full_name = response.firstName;
-                    USER.nickname = response.lastName;
+                    USER.firstName = response.firstName;
+                    USER.lastName = response.lastName;
                     USER.avatar = response.avatar;
                 } catch (error) {
                     console.error('Error fetching post:', error);

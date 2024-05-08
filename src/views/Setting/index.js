@@ -71,12 +71,6 @@ function Setting() {
 
     const updateAvatar = (imgSrc) => {
         avatarUrl.current = imgSrc;
-        fetch(avatarUrl.current)
-            .then((res) => res.blob())
-            .then((blob) => {
-                const file = new File([blob], 'dot.png', blob);
-                setAvatarFile(file);
-            });
     };
 
     const getProfile = useGetProfile();
@@ -143,7 +137,14 @@ function Setting() {
         fetchProfile();
         setLoading(false);
     }, []);
-
+    useEffect(()=> {
+        fetch(avatarUrl.current)
+        .then((res) => res.blob())
+        .then((blob) => {
+            const file = new File([blob], 'dot.png', blob);
+            setAvatarFile(file);
+        });
+    }, [avatarUrl]);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {

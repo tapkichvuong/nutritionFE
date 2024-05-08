@@ -13,6 +13,7 @@ import { DefaultLayout, HeaderOnly } from '~/Layout';
 import NotFound from '~/views/NotFound';
 import RequireAuth from '~/components/RequireAuth';
 import PostAdmin from '~/views/PostAdmin';
+import Chatbot from '~/views/Chatbot';
 
 const ROLES = {
     client: 'CLIENT',
@@ -24,6 +25,11 @@ const publicRoutes = [
     {
         path: '/login',
         component: Login,
+        layout: HeaderOnly,
+    },
+    {
+        path: '/chatbot',
+        component: Chatbot,
         layout: HeaderOnly,
     },
     {
