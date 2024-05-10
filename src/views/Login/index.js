@@ -10,13 +10,13 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate, useLocation } from 'react-router-dom';
+import logo from '~/assets/images/logo.jpeg';
 import useAuth from '~/hooks/useAuth';
 import { useLogin } from '~/services/authServices';
 
@@ -156,7 +156,7 @@ export default function Login() {
                         }}
                     >
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <LockOutlinedIcon />
+                        <img src={logo} alt="Logo" height={42}></img>
                         </Avatar>
                         <Typography component="h1" variant="h5">
                             Log in

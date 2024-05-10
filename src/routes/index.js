@@ -71,10 +71,6 @@ const privateRoutes = [
         auth: <RequireAuth allowedRoles={[ROLES.client, ROLES.seller, ROLES.doctor]} />,
     },
     {
-        path: '/',
-        component: Home,
-    },
-    {
         path: '/post/upload',
         component: Upload,
         auth: <RequireAuth allowedRoles={[ROLES.doctor]} />,

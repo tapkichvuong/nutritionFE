@@ -7,8 +7,8 @@ const cx = classNames.bind(styles);
 
 function PostItem({ postID, category, title, desc, thumbnail, firstName, lastName, avatar }) {
     const USER = {
-        nickname: firstName,
-        full_name: lastName,
+        firstName: firstName,
+        lastName: lastName,
         avatar: avatar
     };
     const extractTextFromHtml = (html) => {

@@ -21,7 +21,7 @@ import Tippy from '@tippyjs/react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import useAuth from '~/hooks/useAuth';
-import useLogout from "~/hooks/useLogout";
+import useLogout from '~/hooks/useLogout';
 import { useGetProfile } from '~/services/userServices';
 
 const cx = classNames.bind(styles);
@@ -65,6 +65,7 @@ function Header() {
     const [avatar, setAvatar] = useState('');
     const getProfile = useGetProfile();
     useEffect(() => {
+        console.log(Object.keys(auth).length);
         setIsLoggedIn(Object.keys(auth).length !== 0);
         const getAvatar = async () => {
             try {
@@ -74,13 +75,15 @@ function Header() {
                 console.error('Error fetching post:', error);
                 // Handle error, e.g., redirect to an error page
             }
+        };
+        if (Object.keys(auth).length !== 0) {
+            getAvatar();
         }
-        getAvatar();
     }, [auth]);
     const nagivateUpload = () => {
-        navigate('post/upload');
-    }
-    const signOut  = async () => {
+        navigate('/post/upload');
+    };
+    const signOut = async () => {
         // if used in more components, this should be in context
         // axios to /logout endpoint
         // try {
@@ -152,7 +155,7 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button to={`'/post/upload`} text>
+                            <Button to={`post/upload`} text>
                                 Upload
                             </Button>
                             <Button to={`/login`} primary>
@@ -162,11 +165,7 @@ function Header() {
                     )}
                     <Menu items={isLoggedIn ? USER_MENU : MENU_ITEMS} onChange={handleMenuChange}>
                         {isLoggedIn ? (
-                            <Image
-                                className={cx('user-avatar')}
-                                src={avatar}
-                                alt="Nguyen Van A"
-                            />
+                            <Image className={cx('user-avatar')} src={avatar} alt="Nguyen Van A" />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />

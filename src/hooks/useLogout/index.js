@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import useAuth from '~/hooks/useAuth';
 import { useRevokedToken } from '~/services/authServices';
 const useLogout = () => {
@@ -7,6 +8,7 @@ const useLogout = () => {
         try {
             const response = await revoked(auth?.accessToken);
             setAuth({});
+            sessionStorage.clear();
         } catch (err) {
             console.error(err);
         }

@@ -44,9 +44,9 @@ function Setting() {
     const [wards, setWard] = useState({});
     const [districts, setDistrict] = useState({});
 
-    const [provincesId, setProvincesId] = useState('');
-    const [districtId, setDistrictId] = useState('');
-    const [wardId, setWardId] = useState('');
+    const [provincesId, setProvincesId] = useState(0);
+    const [districtId, setDistrictId] = useState(0);
+    const [wardId, setWardId] = useState(0);
 
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
@@ -120,12 +120,24 @@ function Setting() {
                     setPhone(response?.phone || '');
                     setBirth(dayjs(response?.birth) || '');
                     setGender(response?.gender || '');
-                    const provinceName = response?.address.province;
-                    const districtName = response?.address.district;
-                    const wardName = response?.address.ward;
-                    setProvincesId(Object.values(provinces).find((province) => province.name === provinceName)?.code);
-                    setDistrictId(Object.values(districts).find((district) => district.name === districtName)?.code);
-                    setWardId(Object.values(wards).find((ward) => ward.name === wardName)?.code);
+
+                    let provinceName = response?.address.province;
+                    let provinceId = Object.values(provincesData).find(
+                        (province) => province.name === provinceName,
+                    )?.code;
+                    setProvincesId(provinceId || '');
+
+                    let districtName = response?.address.district;
+                    let districtId = Object.values(districtData).find(
+                        (district) => district.name === districtName,
+                    )?.code;
+                    setDistrictId(districtId || '');
+
+                    let wardName = response?.address.ward;
+                    let filteredWards = Object.values(wardData).filter((ward) => ward.parent_code === districtId);
+                    let wardId = Object.values(filteredWards).find((ward) => ward.name === wardName)?.code;
+                    setWardId(wardId || '');
+
                     setAddress(response?.address.street || '');
                     avatarUrl.current = response?.avatar;
                 } catch (error) {
@@ -137,20 +149,20 @@ function Setting() {
         fetchProfile();
         setLoading(false);
     }, []);
-    useEffect(()=> {
+    useEffect(() => {
         fetch(avatarUrl.current)
-        .then((res) => res.blob())
-        .then((blob) => {
-            const file = new File([blob], 'dot.png', blob);
-            setAvatarFile(file);
-        });
+            .then((res) => res.blob())
+            .then((blob) => {
+                const file = new File([blob], 'dot.png', blob);
+                setAvatarFile(file);
+            });
     }, [avatarUrl]);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const strBirth = dayjs(birth).format('YYYY-MM-DD');
             const provinceName = Object.values(provincesData).find((province) => province.code === provincesId)?.name;
-            const districtName = Object.values(districts).find((district) => district.code === districtId)?.name;
+            const districtName = Object.values(districtData).find((district) => district.code === districtId)?.name;
             const wardName = Object.values(wardData).find((ward) => ward.code === wardId)?.name;
             const response = await updateProfile(
                 fname,

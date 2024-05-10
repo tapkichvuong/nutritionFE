@@ -79,7 +79,7 @@ function Chatbot() {
                     </div>
                     <div className={cx("message")}>
                       <p className={cx("content")}>
-                        {message.role === 'user' && <span className={cx("font-bold")}>Minh Huy: </span>}
+                        {message.role === 'user' && <span className={cx("font-bold")}>Customer: </span>}
                         {message.content}
                       </p>
                     </div>
